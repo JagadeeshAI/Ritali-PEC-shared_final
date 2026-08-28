@@ -11,12 +11,7 @@ PEC-Nav is zero-shot in the same sense and adds a feedback path these methods la
 
 EQA~\cite{das2018eqa} requires agents to gather evidence before answering, and Explore-EQA~\cite{ren2024exploreeqa} showed VLM-guided frontier selection outperforms random exploration. Later work improved reasoning through scene graphs and hybrid exploration~\cite{saxena2025grapheqa,jiang2025fineeqa}, external tools~\cite{wang2025tooleqa}, memory signals fed back to the planner~\cite{zhai2025memorycentric}, and chain-of-view prompting~\cite{cov2026}.
 
-On the memory side, 3D-Mem~\cite{huang20243dmem} builds volumetric spatial memories and MemoryExplorer~\cite{wang2026memoryexplorer} structures episodic memory with spatial-temporal annotations. That work also introduces LMEE-Bench and, as one of its own baselines, RA-Mem, a retrieval-augmented variant of 3D-Mem, which we report under its original name in Table~\ref{tab:lmee}. The benchmark couples multi-goal navigation with memory-based question answering, naming several objects to reach in sequence and afterwards querying the agent about what it observed.
-
-These methods enrich what the agent remembers, but the search deciding what it sees remains governed by a static scorer. Table~\ref{tab:qualitative} sets
-out four design dimensions, and the \textbf{Adapt.} column separates PEC-Nav from all of them, since no prior method changes its scorer's parameters
-within an episode.
-
+On the memory side, 3D-Mem~\cite{huang20243dmem} builds volumetric spatial memories and MemoryExplorer~\cite{wang2026memoryexplorer} structures episodic memory with spatial-temporal annotations. MemoryExplorer introduces the retrieval-augmented baseline RA-Mem, a variant of 3D-Mem, together with the LMEE-Benchmark dataset~\cite{wang2026memoryexplorer}, which couples multi-goal navigation with memory-based question answering, naming several objects to reach in sequence and afterwards querying the agent about what it observed.
 
 \begin{table}[htbp]
 \centering
@@ -46,3 +41,5 @@ MemExplorer~\cite{wang2026memoryexplorer}& Multi    & $\times$   & \checkmark & 
 \bottomrule
 \end{tabular}
 \end{table}
+
+These methods enrich what the agent remembers, but the search deciding what it sees remains governed by a static scorer. As Table~\ref{tab:qualitative} summarises, no prior method adapts its scorer within an episode, which is what sets PEC-Nav apart.
