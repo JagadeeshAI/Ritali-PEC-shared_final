@@ -1,0 +1,102 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+%%%%%%%%% PAPER TYPE - PLEASE UPDATE FOR FINAL VERSION
+%\usepackage[review,algorithms]{wacv} % REVIEW version, Algorithms Track
+\usepackage[review,applications]{wacv} % REVIEW version, Applications Track
+%\usepackage{wacv} % CAMERA-READY version
+%\usepackage[pagenumbers]{wacv} % To force page numbers (e.g. arXiv)
+
+\def\confName{WACV}
+\def\confYear{2027}
+\def\wacvPaperID{637}
+
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{multirow}
+\usepackage{pifont}
+\newcommand{\cmark}{\ding{51}}
+\newcommand{\xmark}{\ding{55}}
+
+% Eliminate vertical gaps between paragraphs in two-column layout
+\raggedbottom
+\setlength{\parskip}{0pt}
+\setlength{\parsep}{0pt}
+\setlength{\headsep}{0pt}
+\setlength{\topskip}{0pt}
+\setlength{\topmargin}{0pt}
+\setlength{\topsep}{0pt}
+\setlength{\partopsep}{0pt}
+\setlength{\textfloatsep}{6pt plus 1pt minus 1pt}
+\setlength{\floatsep}{6pt plus 1pt minus 1pt}
+\setlength{\intextsep}{6pt plus 1pt minus 1pt}
+\setlength{\dbltextfloatsep}{6pt plus 1pt minus 1pt}
+\setlength{\dblfloatsep}{6pt plus 1pt minus 1pt}
+\setlength{\abovedisplayskip}{4pt plus 2pt minus 2pt}
+\setlength{\belowdisplayskip}{4pt plus 2pt minus 2pt}
+\setlength{\abovedisplayshortskip}{2pt plus 1pt minus 1pt}
+\setlength{\belowdisplayshortskip}{2pt plus 1pt minus 1pt}
+\setlength{\abovecaptionskip}{4pt}
+\setlength{\belowcaptionskip}{2pt}
+
+% Better text justification - reduces inter-word gaps
+\usepackage{microtype}
+
+% Tighter lists globally
+\usepackage{enumitem}
+\setlist{nosep,leftmargin=*}
+
+\setcounter{topnumber}{2}
+\setcounter{bottomnumber}{1}
+\setcounter{totalnumber}{3}
+\renewcommand{\topfraction}{0.85}
+\renewcommand{\bottomfraction}{0.5}
+\renewcommand{\textfraction}{0.12}
+\renewcommand{\floatpagefraction}{0.7}
+\renewcommand{\dbltopfraction}{0.85}
+\renewcommand{\dblfloatpagefraction}{0.7}
+
+\begin{document}
+
+%%%%%%%%% TITLE
+\title{PEC-Nav: Self-Calibrating Frontier Search for Embodied Question Answering}
+
+\maketitle
+\thispagestyle{empty}
+
+%%%%%%%%% ABSTRACT
+\input{Sections/0_abstract}
+
+%%%%%%%%% INTRODUCTION
+\input{Sections/1_intro}
+
+%%%%%%%%% RELATED WORK
+\input{Sections/2_related_work}
+
+%%%%%%%%% METHOD
+\input{Sections/3_method}
+
+%%%%%%%%% EXPERIMENTS
+\input{Sections/4_experiments}
+
+%%%%%%%%% Discusiion
+\input{Sections/5_Discussion}
+
+%%%%%%%%% CONCLUSION
+\input{Sections/6_conclusion}
+
+%%%%%%%%% REFERENCES
+{\small
+\bibliographystyle{ieee_fullname}
+\bibliography{references}
+}
+
+\end{document}

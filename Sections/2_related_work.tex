@@ -1,0 +1,49 @@
+\section{Related Work}
+
+\subsection{Frontier-Based and Zero-Shot Navigation}
+\label{sec:related-frontier}
+
+Frontier-based exploration~\cite{yamauchi1997frontier} directs agents toward boundaries between explored and unexplored space, and SemExp~\cite{chaplot2020semexp} learns a goal-conditioned policy over semantic maps. A zero-shot line then replaced learned scorers with pretrained priors, using CLIP~\cite{radford2021clip} and VLM-based frontier evaluation~\cite{gadre2023cow,yokoyama2024vlfm} and injecting LLM common sense to constrain selection~\cite{zhou2023esc}. A second line organises exploration around structured representations, reasoning over 3D scene graphs~\cite{yin2024sgnav} or unifying goal types within one mechanism~\cite{yin2025unigoal}. SCOPE~\cite{wang2026scope} adds potential-based scoring over a spatio-temporal graph with self-reconsideration of earlier decisions.
+
+PEC-Nav is zero-shot in the same sense and adds a feedback path these methods lack. In all of them the scoring function's parameters are fixed for the episode, even where decisions are revisited, so a scorer that is systematically wrong stays wrong. PEC-Nav verifies predictions on arrival and uses the error to retune both predictor confidence and selection weights online. To our knowledge no prior frontier method adapts its scorer within an episode from its own measured prediction error, recovering an adaptivity normally reserved for trained policies.
+
+\subsection{Embodied Question Answering and Memory}
+
+EQA~\cite{das2018eqa} requires agents to gather evidence before answering, and Explore-EQA~\cite{ren2024exploreeqa} showed VLM-guided frontier selection outperforms random exploration. Later work improved reasoning through scene graphs and hybrid exploration~\cite{saxena2025grapheqa,jiang2025fineeqa}, external tools~\cite{wang2025tooleqa}, memory signals fed back to the planner~\cite{zhai2025memorycentric}, and chain-of-view prompting~\cite{cov2026}.
+
+On the memory side, 3D-Mem~\cite{huang20243dmem} builds volumetric spatial memories and MemoryExplorer~\cite{wang2026memoryexplorer} structures episodic memory with spatial-temporal annotations. That work also introduces LMEE-Bench and, as one of its own baselines, RA-Mem, a retrieval-augmented variant of 3D-Mem, which we report under its original name in Table~\ref{tab:lmee}. The benchmark couples multi-goal navigation with memory-based question answering, naming several objects to reach in sequence and afterwards querying the agent about what it observed.
+
+These methods enrich what the agent remembers, but the search deciding what it sees remains governed by a static scorer. Table~\ref{tab:qualitative} sets
+out four design dimensions, and the \textbf{Adapt.} column separates PEC-Nav from all of them, since no prior method changes its scorer's parameters
+within an episode.
+
+
+\begin{table}[htbp]
+\centering
+\caption{\textbf{Design dimensions.} \textbf{Adapt.} means scorer
+parameters change mid-episode.}
+\label{tab:qualitative}
+\vspace{1mm}
+\setlength{\tabcolsep}{6pt}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Method} & \textbf{Goal} & \textbf{Adapt.} & \textbf{QA} & \textbf{ZS} \\
+\midrule
+SemExp~\cite{chaplot2020semexp}          & Category & $\times$   & $\times$   & $\times$   \\
+CoW~\cite{gadre2023cow}                  & Text     & $\times$   & $\times$   & \checkmark \\
+ESC~\cite{zhou2023esc}                   & Text     & $\times$   & $\times$   & \checkmark \\
+VLFM~\cite{yokoyama2024vlfm}             & Text     & $\times$   & $\times$   & \checkmark \\
+Explore-EQA~\cite{ren2024exploreeqa}     & Question & $\times$   & \checkmark & \checkmark \\
+SG-Nav~\cite{yin2024sgnav}               & Text     & $\times$   & $\times$   & \checkmark \\
+UniGoal~\cite{yin2025unigoal}            & Any      & $\times$   & $\times$   & \checkmark \\
+GraphEQA~\cite{saxena2025grapheqa}       & Question & $\times$   & \checkmark & \checkmark \\
+Fine-EQA~\cite{jiang2025fineeqa}         & Question & $\times$   & \checkmark & $\times$   \\
+ToolEQA~\cite{wang2025tooleqa}           & Question & $\times$   & \checkmark & $\times$   \\
+Mem-Centric~\cite{zhai2025memorycentric} & Question & $\times$   & \checkmark & $\times$   \\
+SCOPE~\cite{wang2026scope}               & Image    & $\times$   & $\times$   & \checkmark \\
+MemExplorer~\cite{wang2026memoryexplorer}& Multi    & $\times$   & \checkmark & \checkmark \\
+\midrule
+\textbf{PEC-Nav (Ours)}                  & \textbf{Question} & \checkmark & \checkmark & \checkmark \\
+\bottomrule
+\end{tabular}
+\end{table}
