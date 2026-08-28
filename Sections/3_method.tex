@@ -21,7 +21,7 @@ The agent fuses egocentric RGB-Depth (RGB-D) observations into a TSDF voxel grid
 
 Our contribution is the loop closed around that scorer. One design property is worth stating first. The prediction $\hat{P}_f$ is never a term in $\mathrm{val}(f)$, and its only route into behaviour is the surprise it generates on arrival, which sets $\sigma_t$ and the weights scoring subsequent frontiers. The predictor shapes search by being wrong in a measurable way rather than by voting on the next move.
 
-\paragraph{Predict.} For each frontier the VLM is prompted with the frontier's egocentric view and the extracted goal, returning the top-3 categories $\{c_1, c_2, c_3\}$ with confidences $\hat{p}_i \in [0,1]$. These are modulated by a self-calibration scale $\sigma_t \in (0.4, 1.0]$ and normalised over $C = \{c_1, c_2, c_3, \text{other}\}$,
+\paragraph{Predict.} For each frontier the VLM is prompted with the frontier's egocentric view and the extracted goal, returning the top-3 categories $\{c_1, c_2, c_3\}$ with confidences $\hat{p}_i \in [0,1]$. These are modulated by a self-calibration scale $\sigma_t \in (0.4, 1.0]$ (set by Eq.~\ref{eq:adapt}) and normalised over $C = \{c_1, c_2, c_3, \text{other}\}$,
 \begin{align}
     u(c_i) &= \hat{p}_i \, \sigma_t, \quad
     u(\text{other}) = \max\!\left(\epsilon,\, 1 - \textstyle\sum_{i=1}^{3} \hat{p}_i \, \sigma_t\right)
@@ -30,7 +30,7 @@ Our contribution is the loop closed around that scorer. One design property is w
 \end{align}
 Normalisation is required rather than cosmetic, since the three confidences need not sum to one and the $\max$ flooring the residual mass can push the total past it. The constant $\epsilon = 10^{-3}$ prevents zero probabilities and also smooths the counts in Eq.~\ref{eq:observed}, regularising both distributions identically. The effect of $\sigma_t$ survives normalisation, since as it falls, mass transfers into the \emph{other} bucket and the agent becomes less committed. Each $\hat{P}_f$ is keyed by the frontier's voxel position and view and scored on arrival as issued rather than rescaled, so surprise measures the error of the belief the agent acted on.
 
-\paragraph{Explore.} The agent selects $f^* = \arg\max_f \mathrm{val}'(f)$ and navigates toward it with a point-goal controller, recording egocentric RGB observations into an episodic memory buffer with spatial-temporal coordinates.
+\paragraph{Explore.} The agent selects $f^* = \arg\max_f \mathrm{val}'(f)$ (Eq.~\ref{eq:calibrate}--\ref{eq:visitpenalty}) and navigates toward it with a point-goal controller, recording egocentric RGB observations into an episodic memory buffer with spatial-temporal coordinates.
 
 \paragraph{Correct.} When the agent comes within $R = 3.0$\,m of a previously predicted frontier, correction fires. The distance is taken on the $(x,z)$ ground plane after transforming the agent's position from the simulator frame to the map frame,
 \begin{equation}
