@@ -5,7 +5,7 @@ Given a natural language prompt, PEC-Nav extracts a structured navigation goal, 
 \begin{figure*}[t]
 \centering
 \includegraphics[width=0.93\textwidth]{figures/Pec-main-architecture .pdf}
-\caption{\textbf{Overview of PEC-Nav.} The agent predicts the layout beyond each frontier, selects one, explores it, and corrects the predictor on arrival. Surprise adapts $\sigma_t$ and reweights $w_e, w_g$, and observations populate an episodic memory used for follow-up questions.}
+\caption{\textbf{Illustration of PEC-Nav.} The agent predicts the layout beyond each frontier, selects one, explores it, and corrects the predictor on arrival, and can answer follow-up questions using the episodic memory populated during exploration.}
 \label{fig:architecture}
 \end{figure*}
 
@@ -97,7 +97,7 @@ Explore-EQA~\cite{ren2024exploreeqa} & 4.26 & 4.26 & N/A & N/A & 15.17 & 8.67 & 
 RA-Mem$^{\ddagger}$~\cite{wang2026memoryexplorer} & 25.53 & 15.65 & 34.29 & 54.29 & \textbf{21.35} & 12.14 & 37.77 & 62.77 & 14.89 & 8.86 & 25.00 & 43.75 & 20.96 & 12.18 & 35.52 & 58.62 \\
 MemoryExplorer~\cite{wang2026memoryexplorer} & 31.91 & 21.11 & 35.71 & \textbf{68.57} & \textbf{21.35} & 14.03 & 48.14 & 63.83 & 23.40 & 12.51 & 34.38 & \textbf{68.75} & 23.53 & 14.99 & 43.62 & 65.52 \\
 \midrule
-PEC-Nav (Ours) & \textbf{40.43} & \textbf{25.06} & \textbf{48.57} & \textbf{68.57} & 20.11 & \textbf{14.35} & \textbf{62.77} & \textbf{67.02} & \textbf{25.00} & \textbf{18.21} & \textbf{50.00} & 56.25 & \textbf{24.45} & \textbf{16.86} & \textbf{57.93} & \textbf{66.21} \\
+\textbf{PEC-Nav (Ours)} & \textbf{40.43} & \textbf{25.06} & \textbf{48.57} & \textbf{68.57} & 20.11 & \textbf{14.35} & \textbf{62.77} & \textbf{67.02} & \textbf{25.00} & \textbf{18.21} & \textbf{50.00} & 56.25 & \textbf{24.45} & \textbf{16.86} & \textbf{57.93} & \textbf{66.21} \\
 \bottomrule
 \end{tabular}
 \end{table*}
