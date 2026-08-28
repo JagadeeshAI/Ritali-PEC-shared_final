@@ -97,7 +97,7 @@ where the floor of 0.1 keeps repeatedly visited frontiers from being scored out 
 \end{algorithmic}
 \end{algorithm}
 
-Algorithm~\ref{alg:pecnav} summarises the decision cycle.
+At each step the agent scores every open frontier, stores a prediction for it, moves to the highest-valued one, and on reaching a previously predicted frontier measures the surprise and updates $\sigma_t$ and the weights, as Algorithm~\ref{alg:pecnav} sets out.
 
 \subsection{Memory, QA and Implementation}
 \label{sec:memory}
@@ -110,7 +110,7 @@ Every egocentric RGB observation is stored with spatial-temporal coordinates, an
 \label{tab:hyperparams}
 \footnotesize
 \setlength{\tabcolsep}{4pt}
-\begin{tabular}{@{}llll@{}}
+\begin{tabular}{@{}ll|ll@{}}
 \toprule
 \textbf{Symbol} & \textbf{Value} & \textbf{Symbol} & \textbf{Value} \\
 \midrule
