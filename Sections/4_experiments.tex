@@ -110,6 +110,14 @@ This section asks whether the mechanism behaves as claimed, using quantities fro
 
 The regime is the one the self-calibration design anticipates. Per-episode mean divergence is of order $2$, which puts $n_t$ near $0.86$ and $\sigma_t$ within roughly $0.08$ of its floor for most of an episode, so the controller commits quickly to a low-trust setting and holds there. Figure~\ref{fig:calibration} confirms this, with $\sigma_t$ falling and $w_e$ rising under sustained surprise. Neither surprise nor accuracy is expected to improve, since the predictor is never updated and the loop's role is to downweight it.
 
+\begin{figure*}[htbp]
+\centering
+\includegraphics[width=0.85\textwidth]{figures/qualitative image pec .pdf}
+\caption{\textbf{Qualitative examples of PEC-Nav.}}
+\label{fig:qualitative}
+\end{figure*}
+
+
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.75\linewidth]{figures/figure4.png}
@@ -150,12 +158,5 @@ Peak GPU memory (GB) & 22.62  & 22.62 \\
 \caption{\textbf{Failure decomposition.} By cause across $n=149$ logged records covering 19 of 32 scenes. Percentages are rounded independently and need not total 100.}
 \label{fig:failures}
 \end{figure}
-
-\begin{figure*}[htbp]
-\centering
-\includegraphics[width=0.85\textwidth]{figures/qualitative image pec .pdf}
-\caption{\textbf{Qualitative examples of PEC-Nav.}}
-\label{fig:qualitative}
-\end{figure*}
-
 \paragraph{Where it fails.} Figure~\ref{fig:failures} decomposes the logged subtask failures by cause, and two dominate. Detector misses account for 65 and planner or navmesh failures for 61, together 85\% of the total. Neither is addressable by better frontier selection, which bounds how much any search-side contribution can move the headline number. Figure~\ref{fig:qualitative} shows a trajectory in which surprise is high from the first corrections, the controller drops $\sigma_t$ toward its floor, and the search stays broad thereafter.
+
